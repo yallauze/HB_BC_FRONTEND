@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="row justify-content-between mb-3">
+        <a class="btn btn-outline-dark" [routerLink]="['/user/add']">
+            <i class="fas fa-plus-circle">Ajouter un pro</i>
+        </a>
+        <div class=""> Nombre total de professionel: {{ nb_professional }} </div>
+    </div>
+
+
+    <table class="table">
+        <thead class="thead-light">
+            <tr class="text-center">
+                <th scope="col" class="align-middle">Prénom_Nom</th>
+                <th scope="col" class="align-middle">Email</th>
+                <th scope="col" class="align-middle">Tel</th>
+                <th scope="col" class="align-middle">Siret</th>
+                <th scope="col" class="align-middle">Nb Garage</th>
+                <th scope="col" class="align-middle">Nb Annonces</th>
+                <th scope="col" class="align-middle">Modifier</th>
+                <th scope="col" class="align-middle">Ajouter Garage</th>
+                <th scope="col" class="align-middle">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="text-center" *ngFor="let pro of pros">
+                <td> {{(pro.firstname + pro.lastname)| titlecase }} </td>
+                <td> {{pro.email}} </td>
+                <td> {{pro.tel}} </td>
+                <td> {{pro.siretNumber}} </td>
+                <td> {{pro.nb_garage}} </td>
+                <td> {{pro.nb_advert}} </td>
+                <td>
+                    <a class="btn btn-outline-dark" [routerLink]="['/user/edit', pro.id]">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                </td>
+                <td>
+                    <a class="btn btn-outline-dark"
+                        [routerLink]="[ '/garage/add', {proId: pro.id, proFullname: pro.firstname+pro.lastname}]">
+                        <i class="fas fa-plus-circle">Garage</i>
+                    </a>
+                </td>
+                <td>
+                    <a class="btn btn-outline-dark" (click)="onDelete(pro.id)">
+                        <i class="far fa-trash-alt"></i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

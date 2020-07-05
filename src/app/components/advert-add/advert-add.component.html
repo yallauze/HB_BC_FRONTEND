@@ -1,0 +1,94 @@
+<div class="container">
+    <div class="col-md-8 mx-auto">
+        <h5 class="text-center p-3 text-uppercase">Créer une nouvelle annonce </h5>
+        <div class="text-center">Pour Garage: {{garageName}} </div>
+        <form #addAdvertForm="ngForm" (ngSubmit)="onSubmit($event)" novalidate>
+            <div class="form-group">
+                <label class="font-weight-bold"> Titre </label>
+                <input type="text" name="title" #title="ngModel" [(ngModel)]="addAdvert.title" class="form-control"
+                    required [class.is-invalid]="title.invalid && title.touched">
+                <small *ngIf="title.invalid && title.touched" class="text-danger"> Le Titre de l'annonce est obligatoire
+                </small>
+            </div>
+            <div class="form-group">
+                <label class="font-weight-bold"> Description </label>
+                <input type="textarea" name="description" #description="ngModel" [(ngModel)]="addAdvert.description"
+                    class="form-control" required [class.is-invalid]="description.invalid && description.touched">
+                <small *ngIf="description.invalid && description.touched" class="text-danger"> La description est
+                    obligatoire </small>
+            </div>
+            <div class="form-group">
+                <label class="font-weight-bold"> Kilomètre </label>
+                <input type="text" name="km" #km="ngModel" [(ngModel)]="addAdvert.km" class="form-control" required
+                    [class.is-invalid]="km.invalid && km.touched">
+                <small *ngIf="km.invalid && km.touched" class="text-danger"> Le KM exacte est obligatoire </small>
+            </div>
+            <div class="form-group">
+                <label class="font-weight-bold"> Prix </label>
+                <input type="text" name="price" #price="ngModel" [(ngModel)]="addAdvert.price" class="form-control"
+                    required [class.is-invalid]="price.invalid && price.touched">
+                <small *ngIf="price.invalid && price.touched" class="text-danger"> Le prix est obligatoire </small>
+            </div>
+
+            <div class="form-group">
+                <!-- type radio pour marque -->
+                <label class="font-weight-bold"> Carburant </label> <br>
+                <div class="form-check form-check-inline" *ngFor="let fuel of fuels">
+                    <input class="form-check-input" type="radio" name="fuel_id" [value]="fuel.id" #fuel_id="ngModel"
+                        required [(ngModel)]="addAdvert.fuel_id">
+                    <label class="form-check-label"> {{fuel.type | titlecase}} </label>
+                </div>
+                <small *ngIf="addAdvertForm.controls.fuel_id?.invalid && addAdvertForm.controls.fuel_id?.touched"
+                    class="text-danger">
+                    Un carburant est obligatoire
+                </small>
+            </div>
+
+            <div class="form-group">
+                <!-- type select pour type -->
+                <label class="font-weight-bold"> Année de mise en circulation </label>
+                <select class="form-control" name="year_started_at" required [(ngModel)]="addAdvert.year_started_at"
+                    #year_started_at="ngModel" [class.is-invalid]="year_started_at.invalid && year_started_at.touched">
+                    <option selected [ngValue]="null" disabled> Sélectionnez l'année: </option>
+                    <option *ngFor="let year of years" [value]="year"> {{ year }} </option>
+                </select>
+                <small class="text-danger" *ngIf="year_started_at.invalid && year_started_at.touched">L'année est
+                    obligatoire</small>
+            </div>
+            <div class="form-group">
+                <!-- type select pour type -->
+                <label class="font-weight-bold"> Marque </label>
+                <select class="form-control" name="brand_id" required [(ngModel)]="addAdvert.brand_id"
+                    #brand_id="ngModel" [class.is-invalid]="brand_id.invalid && brand_id.touched"
+                    (change)="onChange($event.target.value)">
+                    <option [ngValue]="null" disabled selected> Sélectionnez une marque: </option>
+                    <option *ngFor="let brand of brands" [value]="brand.id"> {{ brand.name }} </option>
+                </select>
+                <small class="text-danger" *ngIf="brand_id.invalid && brand_id.touched">La marque est
+                    obligatoire</small>
+            </div>
+            <div class="form-group">
+                <!-- type select pour type -->
+                <label class="font-weight-bold"> Model </label>
+                <select class="form-control" name="model_id" required [(ngModel)]="addAdvert.model_id"
+                    #model_id="ngModel" [class.is-invalid]="model_id.invalid && model_id.touched">
+                    <option [ngValue]="null" disabled selected> Sélectionnez un model: </option>
+                    <option *ngFor="let filteredModel of filteredModels" [value]="filteredModel.id">
+                        {{ filteredModel.name }} </option>
+                </select>
+                <small class="text-danger" *ngIf="model_id.invalid && model_id.touched">Le model est obligatoire</small>
+            </div>
+
+
+            <!-- Images -->
+            <div class="form-group">
+                <label class="font-weight-bold"> Images </label> <br>
+                <input type="file" multiple (change)="picked($event)">
+            </div>
+
+
+            <input type="submit" value="Valider" class="btn btn-primary form-control"
+                [disabled]="addAdvertForm.invalid">
+        </form>
+    </div>
+</div>

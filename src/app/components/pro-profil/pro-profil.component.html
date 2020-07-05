@@ -1,0 +1,14 @@
+<div class="container my-5">
+    <ul class="nav nav-tabs nav-pills nav-justified">
+        <li class="nav-item">
+          <a class="nav-link btn" [ngClass]="{'active bg-dark' : section_compte}" (click)="changeSection('compte')">Mon Compte</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link btn" [ngClass]="{'active bg-dark' : section_garage}" (click)="changeSection('garage')">Mes Garages</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link btn" [ngClass]="{'active bg-dark' : section_advert}" (click)="changeSection('advert')">Mes Annonces</a>
+        </li>
+      </ul>
+</div>
+<router-outlet></router-outlet>

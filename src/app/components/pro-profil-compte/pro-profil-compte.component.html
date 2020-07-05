@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="row">
+        <div *ngIf="!is_editing; then thenBlock else elseBlock"></div>
+        <ng-template #thenBlock>
+            <div class="card mx-auto">
+                <h2 class="card-header text-center"> Username: {{pro.username}} </h2>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Prénom: {{pro.firstname}} </li>
+                    <li class="list-group-item">Nom: {{pro.lastname}} </li>
+                    <li class="list-group-item">Email: {{pro.email}}v </li>
+                    <li class="list-group-item">Tel: {{pro.tel}} </li>
+                    <li class="list-group-item">N° Siret: {{pro.siretNumber}} </li>
+                </ul>
+                <div class="card-body">
+                    <p> {{pro.id}} </p>
+                    <a [routerLink]="['/user/edit', pro.id]" class="card-link">Modifier mes infos</a>
+                    <hr>
+                    <div>
+                        quelques chiffres clées sur mes garages et annonces
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template #elseBlock>
+            <router-outlet></router-outlet>
+        </ng-template>
+    </div>
+</div>

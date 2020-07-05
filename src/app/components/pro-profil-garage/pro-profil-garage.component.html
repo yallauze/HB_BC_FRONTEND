@@ -1,0 +1,42 @@
+<div class="container">
+    <div>
+        <a class="btn btn-outline-dark" [routerLink]="['/garage/add']">
+            <i class="fas fa-plus-circle">Add new Garage</i>
+        </a>
+    </div>
+    <table class="table">
+        <thead class="thead-light">
+            <tr class="text-center">
+                <th scope="col" class="align-middle">Nom</th>
+                <th scope="col" class="align-middle">Tel</th>
+                <th scope="col" class="align-middle">Ville</th>
+                <th scope="col" class="align-middle">Modifier</th>
+                <th scope="col" class="align-middle">Ajouter annonce</th>
+                <th scope="col" class="align-middle">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="text-center" *ngFor="let garage of garages">
+                <td> {{garage.name}} </td>
+                <td> {{garage.tel}} </td>
+                <td> {{garage.city}} </td>
+
+                <td>
+                    <a class="btn btn-outline-dark" [routerLink]="['/garage/edit', garage.id]">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                </td>
+                <td>
+                    <a class="btn btn-outline-dark" [routerLink]="['/annonce/add', garage.id, {garageName: garage.name}]">
+                        <i class="fas fa-plus-circle">Annonce</i>
+                    </a>
+                </td>
+                <td>
+                    <a class="btn btn-outline-dark" (click)="onDelete(garage.id)">
+                        <i class="far fa-trash-alt"></i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

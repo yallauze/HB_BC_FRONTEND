@@ -1,0 +1,83 @@
+<div class="container">
+    <h1 class="text-center text-bolder">Liste Des annonces </h1>
+    <div class="my-5 d-flex justify-content-center">
+        <button class="btn btn-outline-success mx-1" (click)="onFilter()">Chercher avec mes filtres</button>
+        <button class="btn btn-outline-info mx-1" (click)="onFilterClear()">Enlever mes filtres</button>
+    </div>
+    <!-- filter en select without having a form => purpose is to use the two-way binding -->
+    <div class="form-row my-1">
+        <div class="col-md-4">
+            <select [(ngModel)]="selectedBrandId" class="form-control" (change)="onChange($event.target.value)">
+                <option [value]="undefined" selected disabled>Marque</option>
+                <option *ngFor="let brand of brands" [value]="brand.id">{{brand.name}}</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <select [(ngModel)]="selectedModelId" class="form-control">
+                <option [value]="undefined" selected disabled>Model</option>
+                <option *ngFor="let relatedModel of relatedModels" [value]="relatedModel.id">{{relatedModel.name}}
+                </option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <select [(ngModel)]="selectedFuelId" class="form-control">
+                <option [value]="undefined" selected disabled>Carburant</option>
+                <option *ngFor="let fuel of fuels" [value]="fuel.id">{{fuel.type}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-row mb-2">
+        <div class="col-md-2">
+            <select [(ngModel)]="selectedMinYear" class="form-control">
+                <option [value]="undefined" selected disabled>Année min</option>
+                <option *ngFor="let year of years" [value]="year">{{year}}</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <select [(ngModel)]="selectedMaxYear" class="form-control">
+                <option [value]="undefined" selected disabled>Année max</option>
+                <option *ngFor="let year of years" [value]="year">{{year}}</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <select [(ngModel)]="selectedMinKm" class="form-control">
+                <option [value]="undefined" selected disabled>Km min</option>
+                <option *ngFor="let km of kms" [value]="km">{{km}}</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <select [(ngModel)]="selectedMaxKm" class="form-control">
+                <option [value]="undefined" selected disabled>Km max</option>
+                <option *ngFor="let km of kms" [value]="km">{{km}}</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <select [(ngModel)]="selectedMinPrice" class="form-control">
+                <option [value]="undefined" selected disabled>Price min</option>
+                <option *ngFor="let price of prices" [value]="price">{{price}}</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <select [(ngModel)]="selectedMaxPrice" class="form-control">
+                <option [value]="undefined" selected disabled>Price max</option>
+                <option *ngFor="let price of prices" [value]="price">{{price}}</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Affichage de chaque annonce sous form de card -->
+    <div class="row justify-content-around my-5">
+        <div class="col-lg-4 col-md-6 d-flex justify-content-center my-5" *ngFor="let advert of filteredAdverts">
+            <div class="card border border-dark" style="width: 18rem; min-height: 30rem">
+                <img src="{{'data:image/jpg;base64,' + advert.photo}}" class="card-img-top img-fluid" alt="Image">
+                <div class="card-body text-center">
+                    <h5 class="card-title">{{ advert.title }}</h5>
+                    <p class="card-text"> {{ advert.description }} </p>
+                    <p class="card-text">Prix: {{ advert.price }} EUR</p>
+                    <a [routerLink]="['/annonce/detail', advert.id]" class="btn btn-outline-info">Voir détail</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="row mb-3">
+        <div class="col-12 text-right"> Nombre total d'annonce: {{ nb_advert }} </div>
+    </div>
+    
+    <table class="table">
+        <thead class="thead-light">
+            <tr class="text-center">
+                <th scope="col" class="align-middle">
+                    <select class="form-control" (change)="onFilter($event.target.value)">
+                        <option [value]="0" selected >Réf Annonce</option>
+                        <option *ngFor="let advert of adverts" [value]="advert.id">{{advert.id}}</option>
+                    </select>
+                </th>
+                <th scope="col" class="align-middle">Title</th>
+                <th scope="col" class="align-middle">Prix</th>
+                <th scope="col" class="align-middle">Créé le</th>
+                <th scope="col" class="align-middle">Modifier</th>
+                <th scope="col" class="align-middle">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="text-center" *ngFor="let advert of filteredAdverts">
+                <td> {{advert.id}} </td>
+                <td> {{advert.title}} </td>
+                <td> {{advert.price}} </td>
+                <td> {{advert.created_at}} </td>
+                <td>
+                    <a class="btn btn-outline-dark" [routerLink]="['/annonce/edit', advert.id]">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                </td>
+                <td>
+                    <a class="btn btn-outline-dark" (click)="onDelete(advert.id)">
+                        <i class="far fa-trash-alt"></i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

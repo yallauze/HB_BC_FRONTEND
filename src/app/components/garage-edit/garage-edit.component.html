@@ -1,0 +1,47 @@
+<div class="container">
+    <div class="col-md-8 mx-auto">
+        <h5 class="text-center p-3 text-uppercase">Modifier le Garage ID: {{editGarage.id}}</h5>
+        <form #editGarageForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+            <div class="form-group">
+                <label class="font-weight-bold"> Nom du garage </label>
+                <input type="text" name="name" #name="ngModel" [(ngModel)]="editGarage.name" class="form-control"
+                    required [class.is-invalid]="name.invalid && name.touched">
+                <small *ngIf="name.invalid && name.touched" class="text-danger"> Le nom du garage est obligatoire
+                </small>
+            </div>
+            <div class="form-group">
+                <label class="font-weight-bold"> Téléphone </label>
+                <input type="text" name="tel" #tel="ngModel" [(ngModel)]="editGarage.tel" class="form-control" required
+                    [class.is-invalid]="tel.invalid && tel.touched">
+                <small *ngIf="tel.invalid && tel.touched" class="text-danger"> Le téléphone est obligatoire </small>
+            </div>
+            <div class="form-group">
+                <label class="font-weight-bold"> Rue </label>
+                <input type="text" name="street" #street="ngModel" [(ngModel)]="editGarage.street" class="form-control"
+                    required [class.is-invalid]="street.invalid && street.touched">
+                <small *ngIf="street.invalid && street.touched" class="text-danger"> Le Rue est obligatoire </small>
+            </div>
+            <div class="form-group">
+                <label class="font-weight-bold"> Ville </label>
+                <input type="text" name="city" #city="ngModel" [(ngModel)]="editGarage.city" class="form-control"
+                    required [class.is-invalid]="city.invalid && city.touched">
+                <small *ngIf="city.invalid && city.touched" class="text-danger"> La ville est obligatoire </small>
+            </div>
+            <div class="form-group">
+                <label class="font-weight-bold"> Code Postal </label>
+                <input type="text" name="postcode" #postcode="ngModel" [(ngModel)]="editGarage.postcode" class="form-control"
+                    required [class.is-invalid]="postcode.invalid && postcode.touched">
+                <small *ngIf="postcode.invalid && postcode.touched" class="text-danger"> Le code postal est obligatoire </small>
+            </div>
+            <div class="form-group">
+                <label class="font-weight-bold"> Pays </label>
+                <input type="text" name="country" #country="ngModel" [(ngModel)]="editGarage.country"
+                    class="form-control" required [class.is-invalid]="country.invalid && country.touched">
+                <small *ngIf="country.invalid && country.touched" class="text-danger"> Le pays est obligatoire </small>
+            </div>
+
+            <input type="submit" value="Valider" class="btn btn-primary form-control"
+                [disabled]="editGarageForm.invalid">
+        </form>
+    </div>
+</div>
